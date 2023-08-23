@@ -1,15 +1,14 @@
 import models.Conta;
 import models.PessoaFisica;
 
-import java.util.LinkedList;
-import java.util.List;
+import javax.swing.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    private static final Scanner scanner = new Scanner(System.in);
-    List<Conta> pessoa = new LinkedList<>();
-
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Conta> contas = new ArrayList<>();
         int opcao;
 
         do{
@@ -24,6 +23,7 @@ public class Main {
             switch (opcao){
                 case 1 -> {
                     PessoaFisica pessoaFisica = PessoaFisica.cadastrarNovaConta();
+                    contas.add(pessoaFisica);
                     System.out.printf("""
                             Pessoa cadastrada com sucesso!
                             Agência: %d
@@ -32,17 +32,24 @@ public class Main {
                             CPF: %s
                             %n""", pessoaFisica.getAgencia(), pessoaFisica.getSaldo(), pessoaFisica.getNome(), pessoaFisica.getCpf());
                 }
-                case 2 -> {
-                    System.out.println("Usuario logado");
-                }
-                case 3 -> {
-                    System.out.println("Saindo");
-                }
-                default -> {
-                    System.out.println("Opção invalida!");
-                }
+                case 2 -> realizarLogin(contas);
+                case 3 -> System.out.println("Saindo");
+                default -> System.out.println("Opção invalida!");
             }
 
         } while (opcao != 3);
+    }
+
+    public static void realizarLogin(ArrayList<Conta> contas) {
+        int agencia = Integer.parseInt(JOptionPane.showInputDialog("Agência: "));
+        int senha = Integer.parseInt(JOptionPane.showInputDialog("Senha: "));
+
+        for (Conta conta : contas) {
+            if (conta.fazerLogin(agencia, senha)) {
+                System.out.println("Conta logada com sucesso");
+            } else {
+                System.out.println("erro");
+            }
+        }
     }
 }

@@ -13,11 +13,17 @@ public class PessoaFisica extends Conta {
     }
 
     public static PessoaFisica cadastrarNovaConta(){
-        String nome = JOptionPane.showInputDialog("Digite o nome");
+        String nome = JOptionPane.showInputDialog("Digite o nome completo");
         String cpf = JOptionPane.showInputDialog("Digite o cpf");
-        int senha= (Integer.parseInt(JOptionPane.showInputDialog("Digite a senha")));
+        int senha = Integer.parseInt(JOptionPane.showInputDialog("Digite a senha"));
 
         return new PessoaFisica(senha, nome, cpf);
+    }
+
+    @Override
+    public void exibirMenu() {
+        super.exibirMenu();
+        System.out.println("Nome: " + nome);
     }
 
     public String getNome() {

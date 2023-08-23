@@ -1,8 +1,10 @@
 package models;
 
+import javax.swing.*;
 import java.util.Random;
+import java.util.Scanner;
 
-public class Conta {
+public abstract class Conta {
     private int agencia;
     private int senha;
     private double saldo;
@@ -16,6 +18,41 @@ public class Conta {
     private int gerandoAgenciaAleatorio(){
         Random random = new Random();
         return random.nextInt(1000);
+    }
+
+    public boolean fazerLogin(int agencia, int senha) {
+        return this.agencia == agencia && this.senha == senha;
+    }
+
+    public void exibirMenu() {
+        Scanner scanner = new Scanner(System.in);
+        int opcao;
+
+        do {
+            System.out.println("""
+                    Escolha uma opção
+                    1 - Exibir informações da conta
+                    2 - Depositar
+                    3 - Sacar
+                    4 - Transferir
+                    5 - Voltar
+                    """);
+            opcao = scanner.nextInt();
+
+            switch (opcao) {
+                case 1 -> {
+                    System.out.printf("""
+                            Agência: %d
+                            Saldo: %.2f
+                            %n""", getAgencia(), getSaldo());
+                }
+                case 2 -> {
+                    double valor = Double.parseDouble(JOptionPane.showInputDialog("Qual valor a ser depositado"));
+                    saldo += valor;
+                    System.out.printf("Deposito realizado com sucesso. Novo saldo: %.2f \n %n", saldo);
+                }
+            }
+        } while (opcao != 6);
     }
 
     public int getAgencia() {
