@@ -20,12 +20,6 @@ public class PessoaFisica extends Conta {
         return new PessoaFisica(senha, nome, cpf);
     }
 
-    @Override
-    public void exibirMenu() {
-        super.exibirMenu();
-        System.out.println("Nome: " + nome);
-    }
-
     public String getNome() {
         return nome;
     }

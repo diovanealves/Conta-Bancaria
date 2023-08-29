@@ -11,7 +11,7 @@ public class Main {
         ArrayList<Conta> contas = new ArrayList<>();
         int opcao;
 
-        do{
+        do {
             System.out.println("""
                     Escolha uma opção:
                     1 - Cadastrar como Pessoa Fisica
@@ -20,7 +20,7 @@ public class Main {
                     """);
             opcao = scanner.nextInt();
 
-            switch (opcao){
+            switch (opcao) {
                 case 1 -> {
                     PessoaFisica pessoaFisica = PessoaFisica.cadastrarNovaConta();
                     contas.add(pessoaFisica);
@@ -46,9 +46,9 @@ public class Main {
 
         for (Conta conta : contas) {
             if (conta.fazerLogin(agencia, senha)) {
-                System.out.println("Conta logada com sucesso");
+                conta.exibirMenu();
             } else {
-                System.out.println("erro");
+                System.out.println("Usuário ou senha incorreta");
             }
         }
     }
